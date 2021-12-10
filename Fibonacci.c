@@ -19,3 +19,17 @@ int fib(int n){
         return i+j;
     }
 }
+
+int main(int argc, char **argv){
+    int n;
+    int result;
+    char *a = argv[1];
+    n = atoi(a);
+
+    #pragma omp parallel
+    {
+        #pragma omp single
+        result = fib(n);
+    }
+    printf("Result in %d\n", result);
+}
