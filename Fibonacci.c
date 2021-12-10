@@ -81,17 +81,31 @@ void Factors(unsigned long long n)
     printf("\n");
 }
 
-int main(int argc, char **argv)
+// Metodo para Calcular el resultado 
+void CalculateResult(int n)
 {
-    int n;
-    int result;
-    char *a = argv[1];
-    n = atoi(a);
-
+    unsigned long long result;
+    
     #pragma omp parallel
     {
         #pragma omp single
-        result = fib(n);
+        {
+            result = fib(unsigned long long(n));
+            printf("n: %d - valor: %llu - facotres: ", n, result);
+            Factors(result);
+        }
     }
     printf("Result in %d\n", result);
+}
+
+// Metodo Main del script
+int main(int argc, char **argv)
+{
+    int n;
+    char *a = argv[1];
+    n = atoi(a);
+    for (int i = 1; i<= n; i++)
+    {
+        CalculateResult(i);
+    }
 }
