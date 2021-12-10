@@ -1,10 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <omp.h>
+#include <math.h>
+#include <stdbool.h>
 
-int fib(int n){
-    int i;
-    int j;
+// Metodo para realizar el calculo Fibunacci
+unsigned long long fib(unsigned long long n){
+    // Cambiamos variables int por unsigned long para almacenar enteros largos
+    unsigned long i;
+    unsigned long j;
     if(n<2)
     {
         return n;
