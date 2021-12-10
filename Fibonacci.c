@@ -5,8 +5,10 @@
 #include <stdbool.h>
 
 // Metodo para realizar el calculo Fibunacci
-unsigned long long fib(unsigned long long n){
-    // Cambiamos variables int por unsigned long para almacenar enteros largos
+unsigned long long fib(unsigned long long n)
+{
+    // Cambiamos variables int por unsigned long 
+    // para almacenar enteros largos
     unsigned long i;
     unsigned long j;
     if(n<2)
@@ -24,7 +26,63 @@ unsigned long long fib(unsigned long long n){
     }
 }
 
-int main(int argc, char **argv){
+// Metodo para calcular los factores de los numeros
+void Factors(unsigned long long n)
+{
+    bool firstNumber = true;
+    if (n == 1)
+    {
+        printf("1\n");
+        return;
+    }
+    while (n % 2 == 0)
+    {
+        if (firstNumber == false)
+        {
+            printf(" x ");
+        }
+        else
+        {
+            firstNumber = false;
+        }
+        printf("2");
+        n = n / 2;
+    }
+    int aux = sqrtl(n);
+    #pragma parallel for shared(n)
+    for (int i = 3; i <= aux; i += 2)
+    {
+        while (n % i == 0)
+        {
+            if (firstNumber == false)
+            {
+                printf(" x ");
+            }
+            else
+            {
+                firstNumber = false;
+            }
+            printf("%d", i);
+            n = n / i;
+        }
+    }
+    if (n > 2)
+    {
+        if (firstNumber == false)
+        {
+            printf(" x ");
+        }
+        else
+        {
+            firstNumber = false;
+        }
+        printf("%llu", n);
+    }
+    printf("\n");
+}
+
+int main(int argc, char **argv)
+{
     int n;
     int result;
     char *a = argv[1];
